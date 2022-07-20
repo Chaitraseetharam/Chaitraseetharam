@@ -1,0 +1,63 @@
+To Delete Temp file Run:
+windowsKey+R 
+%temp%
+prefetch
+temp
+======================================
+To Delete Temp file from Command Prompt :
+it's an available way to delete temporary files in Windows 10 by using CMD and here is how.
+
+
+Step 1: Type cmd in the taskbar and run it as an admin.
+
+
+Step 2: Enter del /q/f/s %TEMP%\* in the cmd and press Enter to run this command.
+======================================
+To disable Windows 10 Automatic Updates:
+Search ->  services 
+Scroll down to 'Windows Update' in the resulting list.
+
+Double click the 'Windows Update' Entry 
+In the resulting dialog
+if the service is started, click 'Stop'
+
+Set Startup Type to 'Disabled'
+
+===================================================
+https://drive.google.com/file/d/1a_MwLgr3NWeTePY-sEQfJzdXNRJFXY2B/view?usp=sharing
+___________________________________________________________
+____________________________________________________________
+
+https://github.com/skillrary/QspidersDevOpsBatch1
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+
+Cloud Service Models - javatpoint
+
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+https://www.bmc.com/blogs/gartner-magic-quadrant-cips-cloud-infrastructure-platform-services/
+___________________________________________________________________________
+___________________________________________________________________________
+
+https://www.cloudflare.com/en-in/learning/cloud/what-is-the-cloud/
+
+-----------------------------------------------------------------------------
+-----------------------------------------------------------------------------
+https://k21academy.com/amazon-web-services/amazon-s3-bucket-and-storage-classes/
+____________________________________________________________
+1) linux_commend token
+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
+
+2) git _commend token
+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_
+_________________________________________________________________
+sadiqa.b@testyantra.com
+
+mithun@testyantra.com
+
+--------------------------------------------------------------------------------------
+ https://8beb-2409-4071-d96-8d2e-ece9-434f-d78e-6d04.in.ngrok.io/github-webhook       ( forwording) jenkins
+
+----------------------------------------------------------------------------------------------
+https://jfrog.com/community/open-source/          (jfrog instalation link)
