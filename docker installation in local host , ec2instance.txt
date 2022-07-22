@@ -1,0 +1,19 @@
+1) https://hub.docker.com/   { to install docker in local host }
+
+installing docker in ec2 instance:
+
+1)sudo su 
+
+2)yum install docker 
+
+3)yum update -y 
+
+4)yum install docker 
+
+5)systemctl enable docker 
+
+6)systemctl start docker 
+
+7)docker pull ubuntu
+
+8) docker image

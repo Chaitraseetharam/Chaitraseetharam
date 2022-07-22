@@ -1,0 +1,135 @@
+1) creat ec2 instance of sonarqube & connect it.
+
+sonarqube installation steps
+
+sudo apt-get update && sudo apt-get install default-jdk -y
+
+java -version
+
+sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg main" >> /etc/apt/sources.list.d/pgdg.list'
+
+sudo wget -q https://www.postgresql.org/media/keys/ACCC4CF8.asc -O - | sudo apt-key add -
+
+sudo apt-get -y install postgresql postgresql-contrib
+
+sudo systemctl start postgresql
+
+sudo systemctl enable postgresql
+
+sudo su - postgres
+
+createuser sonar
+
+psql
+
+ALTER USER sonar WITH ENCRYPTED password 'password';
+
+CREATE DATABASE sonarqube OWNER sonar;
+
+ GRANT ALL PRIVILEGES ON DATABASE sonarqube to sonar;
+
+ \q
+
+ exit
+
+2)
+
+Then go to new tab type download sonarqube
+
+sudo wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-9.5.0.56709.zip
+
+sudo apt-get -y install unzip
+
+sudo unzip sonarqube*.zip -d /opt (ctrl c)
+
+ls -alk
+
+sonarqube-9.5.0.56709(ctrl c)
+
+sudo unzip sonarqube*.zip -d /opt
+
+cd /opt
+
+ls -al
+
+sudo mv /opt/sonarqube-9.5.0.56709 /opt/sonarqube -v
+
+ls -al
+
+sudo groupadd sonarGroup
+
+sudo useradd -c "user to run SonarQube" -d /opt/sonarqube -g sonarGroup sonar
+ 
+sudo chown sonar:sonarGroup /opt/sonarqube -R
+
+ls -al
+
+cd sonarqube/
+
+ls
+
+cd conf
+
+ls -al
+
+sudo nano /opt/sonarqube/conf/sonar.properties
+
+sonar.jdbc.url=jdbc:postgresql://localhost/sonarqube
+
+sudo nano /opt/sonarqube/bin/linux-x86-64/sonar.sh
+
+RUN_AS_USER=sonar
+
+sudo vi /opt/sonarqube/bin/linux-x86-64/sonar.sh
+
+sudo nano /etc/systemd/system/sonar.service
+
+[Unit]
+Description=SonarQube service
+After=syslog.target network.target
+
+[Service]
+Type=forking
+
+ExecStart=/opt/sonarqube/bin/linux-x86-64/sonar.sh start
+ExecStop=/opt/sonarqube/bin/linux-x86-64/sonar.sh stop
+LimitNOFILE=131072
+LimitNPROC=8192
+User=sonar
+Group=sonarGroup
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+
+sudo vi /etc/sysctl.conf
+
+vm.max_map_count=262144
+fs.file-max=65536
+ulimit -n 65536
+ulimit -n 4096
+
+sudo vi /etc/security/limits.conf
+
+-------->At the end of this file, add the following: 
+
+sonar   -   nofile   65536
+sonar   -   nproc    4096
+
+sudo systemctl start sonar
+
+sudo systemctl enable sonar
+
+sudo systemctl status sonar
+
+---------->To comeout of it type q
+
+tail -f /opt/sonarqube/logs/sonar*.log                    (to comeout of it ctrl c)
+
+3)
+
+Go to ec2 instance stop the sonarqube and after stopping once again start the instance 
+select the instance icon and connect
+
+4)
+Copy the public ipv4 and paste it in new chrome with localhost 9000 and enter
