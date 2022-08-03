@@ -1,4 +1,4 @@
-su1) Kubernetes playground 
+1) Kubernetes playground 
      Play with K8s
      Play with Kubernetes classroom  
 -----> to work with kubernetes or to learn u can use this platforme.
@@ -8,11 +8,21 @@ su1) Kubernetes playground
 ---------> to learn about object of kubernetes.
 
 
-HANDS ON WORK ON KUBERNETES 
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-3)sudo su
 
-4)nano docker.sh
+(1)HANDS ON  WORK ON ( BY USEING KUBEAM ) ------> KUBEAM : here we set up multiple nodes --> like {1master 1 node/1master multiple nodes/multiple master multiple nodes}
+
+
+(.)create 3 instance [ 1 master node & 2 working nodes / ubuntu (or) linux / T2.medium / all traffic ]
+
+0)sudo apt-get updat -y
+
+1)sudo su
+
+hostnamectl set-hostname <name>   -----> to give the name for user / thn go to duplicate session
+
+2)nano docker.sh
 
 swapoff -a 
 apt update -y 
@@ -20,11 +30,11 @@ apt install -y docker.io
 systemctl enable docker 
 systemctl start docke
 
-5)chmod -R 777 docker.sh
+3)chmod -R 777 docker.sh
 
-6)./docker.sh
+4)./docker.sh
 
-7)nano kubernetes.sh 
+5)nano kubernetes.sh 
 
 sudo apt-get update && sudo apt-get install -y apt-transport-https curl 
 curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add - 
@@ -32,33 +42,50 @@ cat <<EOF | sudo tee /etc/apt/sources.list.d/kubernetes.list
 deb https://apt.kubernetes.io/ kubernetes-xenial main 
 EOF
 sudo apt-get update 
-sudo apt-get install -y kubelet=1.20.2-00 kubeadm=1.20.2-00 
-kubectl=1.20.2-00 
+sudo apt-get install -y kubelet=1.20.2-00 kubeadm=1.20.2-00 kubectl=1.20.2-00 
 sudo apt-mark hold kubelet kubeadm kubectl 
 
-8)chmod -R 777 kubernetes.sh 
+6)chmod -R 777 kubernetes.sh 
 
-9)./kubernetes.sh
-
-10)kubeadm init --apiserver-advertise-address=172.31.26.121 --pod-network-cidr=192.168.0.0/16 --ignore-preflight-errors all 
-
----------> (10)use this only in master node)
-
-11)
+7)./kubernetes.sh
 
 
+---------> from here (8)use this only in master node & u hv to paste it once (not more then that bcz it'll give errors)
+
+8)kubeadm init --apiserver-advertise-address=<master node private ip address> --pod-network-cidr=192.168.0.0/16 --ignore-preflight-errors all 
+
+---->  {after this commend u"ll get a line @ the end copy it & paste it in other 2 nodes}
+
+9)exit
+
+10)mkdir -p $HOME/.kube
+
+11)sudo cp -i /etc/kubernetes/admin.conf $HOME/.kub/config
+
+12)sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+13)kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+
+14) vi pod.yml
+
+15)kubectl apply -f pod.yml
+
+16)kubectl get pod
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+(1)HANDS ON  WORK ON ( BY USEING MINICUBE ) ------> MINICUBE : here we will create single instance with everything --->[everything means masternodes & working nodes] ---> (but we use this only 4 learning) --> like {1master 1 node/1master multiple nodes/multiple master multiple nodes}
+
+
+(.)create 1 instance [ ubuntu (or) linux / T2.medium / all traffic ]
 
 
 
+(a) https://phoenixnap.com/kb/install-podman-on-ubuntu
 
 
-
-
-
-
-
-HANDS ON  WORK ON ( BY USEING)
-https://phoenixnap.com/kb/install-podman-on-ubuntu
 1)sudo apt update
 
 2)sudo apt -y install podman
@@ -76,31 +103,33 @@ https://phoenixnap.com/kb/install-podman-on-ubuntu
 8)podman --version
 
 
-https://phoenixnap.com/kb/install-minikube-on-ubuntu
+(b)https://phoenixnap.com/kb/install-minikube-on-ubuntu
 
 
 1)sudo apt-get update -y
 
-2)sudo apt-get install curl
+2)sudo apt-get upgrade -y     -------------------------> ok
 
-3)sudo apt-get install apt-transport-https
+3)sudo apt-get install curl   -------------------------> enter + ok
 
-4)sudo apt install virtualbox virtualbox-ext-pack
+4)sudo apt-get install apt-transport-https   -----------> ok
 
-5)tab + enter
+5)sudo apt install virtualbox virtualbox-ext-pack
 
-6) yes
+7)tab + enter
 
-7)wget https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+8) yes
 
-8)sudo cp minikube-linux-amd64 /usr/local/bin/minikube
+9)wget https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
 
-9)sudo chmod 755 /usr/local/bin/minikube
+10)sudo cp minikube-linux-amd64 /usr/local/bin/minikube
+
+11)sudo chmod 755 /usr/local/bin/minikube
 
 
-10)minikube version
+12)minikube version
 
-11)curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
+13)curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
 
 
 12)chmod +x ./kubectl
@@ -111,6 +140,29 @@ https://phoenixnap.com/kb/install-minikube-on-ubuntu
 
 15)minikube start --force 
 
-16)kubectl get pods
+16)‌minikube status
 
-17)
+17)kubectl config view
+
+18)kubectl cluster-info
+
+19)kubectl get nodes
+
+20)kubectl get pod
+
+21)minikube ssh
+
+22)exit
+
+23)minikube stop
+
+24)minikube status
+
+25)minikube delete
+
+26)minikube addons list
+
+27)minikube dashboard
+
+28)minikube dashboard --url
+
