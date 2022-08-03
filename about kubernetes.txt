@@ -1,0 +1,116 @@
+su1) Kubernetes playground 
+     Play with K8s
+     Play with Kubernetes classroom  
+-----> to work with kubernetes or to learn u can use this platforme.
+
+2)https://kubernetes.io/ 
+   https://chkrishna.medium.com/kubernetes-objects-e0a8b93b5cdc
+---------> to learn about object of kubernetes.
+
+
+HANDS ON WORK ON KUBERNETES 
+
+3)sudo su
+
+4)nano docker.sh
+
+swapoff -a 
+apt update -y 
+apt install -y docker.io 
+systemctl enable docker 
+systemctl start docke
+
+5)chmod -R 777 docker.sh
+
+6)./docker.sh
+
+7)nano kubernetes.sh 
+
+sudo apt-get update && sudo apt-get install -y apt-transport-https curl 
+curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add - 
+cat <<EOF | sudo tee /etc/apt/sources.list.d/kubernetes.list 
+deb https://apt.kubernetes.io/ kubernetes-xenial main 
+EOF
+sudo apt-get update 
+sudo apt-get install -y kubelet=1.20.2-00 kubeadm=1.20.2-00 
+kubectl=1.20.2-00 
+sudo apt-mark hold kubelet kubeadm kubectl 
+
+8)chmod -R 777 kubernetes.sh 
+
+9)./kubernetes.sh
+
+10)kubeadm init --apiserver-advertise-address=172.31.26.121 --pod-network-cidr=192.168.0.0/16 --ignore-preflight-errors all 
+
+---------> (10)use this only in master node)
+
+11)
+
+
+
+
+
+
+
+
+
+
+
+
+HANDS ON  WORK ON ( BY USEING)
+https://phoenixnap.com/kb/install-podman-on-ubuntu
+1)sudo apt update
+
+2)sudo apt -y install podman
+
+3). /etc/os-release
+
+4)sudo sh -c "echo 'deb http://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_${VERSION_ID}/ /' > /etc/apt/sources.list.d/devel:kubic:libcontainers:stable.list"
+
+5)wget -nv https://download.opensuse.org/repositories/devel:kubic:libcontainers:stable/xUbuntu_${VERSION_ID}/Release.key -O- | sudo apt-key add -
+
+6)sudo apt update
+
+7)sudo apt -y install podman
+
+8)podman --version
+
+
+https://phoenixnap.com/kb/install-minikube-on-ubuntu
+
+
+1)sudo apt-get update -y
+
+2)sudo apt-get install curl
+
+3)sudo apt-get install apt-transport-https
+
+4)sudo apt install virtualbox virtualbox-ext-pack
+
+5)tab + enter
+
+6) yes
+
+7)wget https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+
+8)sudo cp minikube-linux-amd64 /usr/local/bin/minikube
+
+9)sudo chmod 755 /usr/local/bin/minikube
+
+
+10)minikube version
+
+11)curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
+
+
+12)chmod +x ./kubectl
+
+13)sudo mv ./kubectl /usr/local/bin/kubectl
+
+14)kubectl version -o json
+
+15)minikube start --force 
+
+16)kubectl get pods
+
+17)
